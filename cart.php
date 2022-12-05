@@ -7,10 +7,10 @@ $in = implode(',',$_SESSION['cart']);
 <html lang="en">
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 <head>
-<title>VStack :: Cart</title>
+<title>Vittorio :: Cart</title>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="description" content="VStack Shop Project">
+<meta name="description" content="Vittorio Shop Project">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" type="text/css" href="styles/bootstrap4/bootstrap.min.css">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css" integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu" crossorigin="anonymous">
@@ -198,7 +198,7 @@ $in = implode(',',$_SESSION['cart']);
       <div class="row">
         <div class="col">
           <div class="copyright_container d-flex flex-sm-row flex-column align-items-center justify-content-start">
-            <div class="copyright_content"> Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved to VStack </div>
+            <div class="copyright_content"> Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved to Vittorio </div>
             <div class="logos ml-sm-auto">
               <ul class="logos_list">
                 <li><a href="#"><img src="images/logos_1.png" alt=""></a></li>
