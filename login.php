@@ -36,7 +36,7 @@
               <label for="inputPassword">Parola</label>
             </div>
             <button class="btn btn-lg btn-primary btn-block text-uppercase" name="login" type="submit">Conectare</button>
-            <a class="d-block text-center mt-2 small" href="register.php">Loghează-te</a>
+            <a class="d-block text-center mt-2 small" href="register.php">Înregistrează-te</a>
           </form>
         </div>
       </div>

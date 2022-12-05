@@ -106,7 +106,18 @@ $in = implode( ',', $_SESSION[ 'cart' ] );
 					$query="SELECT * from product WHERE id IN($in)";
 					$result = mysqli_query($conn, $query);
 					$count = mysqli_num_rows( $result );
-					?>
+
+          $querry2 = "SELECT email from users WHERE username=\"" . $_SESSION["username"]. "\"";
+          $result2 = mysqli_query($conn, $querry2);
+
+          mail(
+            $to = $result2->fetch_object()->email,
+            $subject = "Comanda dumneavoastra de pe VStack",
+            $message = "Comanda dvs. care conține $count articole pentru un total de € " . $_SESSION['total'] . " a fost plasată cu succes!\n
+            Vă mulțumim că ați ales Vstack pentru cumpărături!",
+            $headers = "From: VStack@mail.domain"
+          )
+          ?>
   <div class="order_total">
     <div class="order_total_content text-center">
       <div class="order_total_title">Comanda dvs. care conține <?php echo $count ?> articole pentru un total de €
@@ -115,7 +126,6 @@ $in = implode( ',', $_SESSION[ 'cart' ] );
         Vă mulțumim că ați ales Vstack pentru cumpărături! </div>
     </div>
   </div>
-  <input type="text" placeholder="Adresa" >
 	<?php $_SESSION['cart'] = array(); ?>
   <!-- Footer -->
   <footer class="footer">
