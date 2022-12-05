@@ -163,7 +163,7 @@ unset($_SESSION['qty_array']);
           <!-- Panoul afacerii -->
           
           <div class="deals">
-            <div class="deals_title">Afacerea saptamanii</div>
+            <div class="deals_title">Promotia saptamanii</div>
             <div class="deals_slider_container"> 
               
               <!-- Slider -->
@@ -180,7 +180,7 @@ unset($_SESSION['qty_array']);
                   <div class="deals_content">
                     <div class="deals_info_line d-flex flex-row justify-content-start">
                       <div class="deals_item_name"><?php echo $row['name']; ?></div>
-                      <div class="deals_item_price ml-auto">€<?php echo $row['price']; ?></div>
+                      <div class="deals_item_price ml-auto">€<?php echo $row['price'] - 100; ?></div>
                     </div>
                     <div class="available">
                       <div class="available_line d-flex flex-row justify-content-start">
@@ -201,10 +201,10 @@ unset($_SESSION['qty_array']);
                             <span>ore</span> </div>
                           <div class="deals_timer_unit">
                             <div id="deals_timer1_min" class="deals_timer_min"></div>
-                            <span>minuti</span> </div>
+                            <span>minute</span> </div>
                           <div class="deals_timer_unit">
                             <div id="deals_timer1_sec" class="deals_timer_sec"></div>
-                            <span>secondi</span> </div>
+                            <span>secunde</span> </div>
                         </div>
                       </div>
                     </div>
@@ -219,7 +219,7 @@ unset($_SESSION['qty_array']);
             </div>
           </div>
           
-          <!-- Sconti -->
+          <!-- Reduceri -->
           <div class="featured">
             <div class="tabbed_container">
               <div class="tabs">
