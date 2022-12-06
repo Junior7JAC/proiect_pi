@@ -47,7 +47,7 @@ $in = implode( ',', $_SESSION[ 'cart' ] );
                   <ul class="custom_list clc">
                     <li><a class="clc" href="#">Toate categoriile</a></li>
                     <li><a class="clc" href="#">Componente PC</a></li>
-                    <li><a class="clc" href="#">Portabil</a></li>
+                    <li><a class="clc" href="#">Laptop</a></li>
                     <li><a class="clc" href="#">Networking</a></li>
                     <li><a class="clc" href="#">Accesorii</a></li>
                     <li><a class="clc" href="#">Smartphone</a></li>
@@ -73,7 +73,7 @@ $in = implode( ',', $_SESSION[ 'cart' ] );
                 Bine ai venit, <?php echo($_SESSION['username']) ?>!
               </center>
               </span><br>
-              <a class="dropdown-item" href="profile.php">Profil</a><a class="dropdown-item" href="orders.php">Comenzi</a><a class="dropdown-item" href="payment.php">Metode de plată</a><a class="dropdown-item" href="logout.php">Deconectare</a></div>
+              <a class="dropdown-item" href="profile.php">Profil</a><a class="dropdown-item" href="orders.php">Comenzi</a><a class="dropdown-item" href="logout.php">Deconectare</a></div>
           </div>
         </div>
         <?php }else{?>
@@ -102,8 +102,9 @@ $in = implode( ',', $_SESSION[ 'cart' ] );
   </header>
   
   <!-- Cart -->
-  <?php
-					$query="SELECT * from product WHERE id IN($in)";
+  <?php   
+          if(isset($_SESSION["username"])){
+            $query="SELECT * from product WHERE id IN($in)";
 					$result = mysqli_query($conn, $query);
 					$count = mysqli_num_rows( $result );
 
@@ -126,7 +127,15 @@ $in = implode( ',', $_SESSION[ 'cart' ] );
         Vă mulțumim că ați ales Vittorio pentru cumpărături! </div>
     </div>
   </div>
-	<?php $_SESSION['cart'] = array(); ?>
+         <?php 
+        $_SESSION['cart'] = array(); 
+        }else{ ?>
+  <div class="order_total">
+    <div class="order_total_content text-center">
+      <div class="order_total_title"> Va rugam sa va logati pentru a finaliza comanda! </div>
+    </div>
+  </div>
+     <?php   }  ?>		
   <!-- Footer -->
   <footer class="footer">
     <div class="container">

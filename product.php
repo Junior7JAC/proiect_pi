@@ -49,7 +49,7 @@ $id = $_GET['id'];
                   <ul class="custom_list clc">
                     <li><a class="clc" href="#">Toate categoriile</a></li>
                     <li><a class="clc" href="#">Componente PC</a></li>
-                    <li><a class="clc" href="#">Portabil</a></li>
+                    <li><a class="clc" href="#">Laptop</a></li>
                     <li><a class="clc" href="#">Networking</a></li>
                     <li><a class="clc" href="#">Accesorii</a></li>
                     <li><a class="clc" href="#">Smartphone</a></li>
@@ -72,7 +72,7 @@ $id = $_GET['id'];
           <div class="account_content"><a class="dropdown-toggle" href="#" id="settingsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="images/account.png" alt=""></a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="settingsDropdown">
               <span><center>Bine ai venit, <?php echo($_SESSION['username']) ?>!</center></span><br>
-              <a class="dropdown-item" href="profile.php">Profil</a><a class="dropdown-item" href="orders.php">Comenzi</a><a class="dropdown-item" href="payment.php">Metode de plată</a><a class="dropdown-item" href="logout.php">Deconectare</a></div>
+              <a class="dropdown-item" href="profile.php">Profil</a><a class="dropdown-item" href="orders.php">Comenzi</a><a class="dropdown-item" href="logout.php">Deconectare</a></div>
           </div>
         </div>
         <?php }else{?>
@@ -84,7 +84,6 @@ $id = $_GET['id'];
               </div>
             </div>
             <?php } ?>
-            
             <!-- Cart -->
             <div class="cart">
               <div class="cart_container d-flex flex-row align-items-center justify-content-end"> <a href="cart.php">

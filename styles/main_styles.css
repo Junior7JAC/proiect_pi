@@ -1807,7 +1807,7 @@ Footer
 }
 .copyright_content {
   font-size: 12px;
-  color: rgba(0, 0, 0, 0.6);
+  color: rgb(255, 255, 255);
 }
 .copyright_content span {
   font-weight: 500;

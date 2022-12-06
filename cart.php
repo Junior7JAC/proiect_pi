@@ -2,6 +2,7 @@
 include 'config/conn.php';
 session_start();
 $in = implode(',',$_SESSION['cart']);
+$cartTotal = 0;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -48,7 +49,7 @@ $in = implode(',',$_SESSION['cart']);
                         <ul class="custom_list clc">
                           <li><a class="clc" href="#">Toate categoriile</a></li>
                           <li><a class="clc" href="#">Componente PC</a></li>
-                          <li><a class="clc" href="#">Portabil</a></li>
+                          <li><a class="clc" href="#">Laptop</a></li>
                           <li><a class="clc" href="#">Networking</a></li>
                           <li><a class="clc" href="#">Accesorii</a></li>
                           <li><a class="clc" href="#">Smartphone</a></li>
@@ -71,7 +72,7 @@ $in = implode(',',$_SESSION['cart']);
           <div class="account_content"><a class="dropdown-toggle" href="#" id="settingsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="images/account.png" alt=""></a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="settingsDropdown">
               <span><center>Bine ai venit, <?php echo($_SESSION['username']) ?>!</center></span><br>
-              <a class="dropdown-item" href="profile.php">Profil</a><a class="dropdown-item" href="orders.php">Comenzi</a><a class="dropdown-item" href="payment.php">Metode de plata</a><a class="dropdown-item" href="logout.php">Deconectare</a></div>
+              <a class="dropdown-item" href="profile.php">Profil</a><a class="dropdown-item" href="orders.php">Comenzi</a><a class="dropdown-item" href="logout.php">Deconectare</a></div>
           </div>
         </div>
         <?php }else{?>
@@ -119,13 +120,24 @@ $in = implode(',',$_SESSION['cart']);
 			<div class="row">
 				<div class="col-lg-10 offset-lg-1">
 					<div class="cart_container">
-						<div class="cart_title">Cart</div>
-						<?php
-					$query="SELECT * FROM product WHERE id IN($in)";
-					$result = mysqli_query($conn, $query);
-					while ($row = mysqli_fetch_assoc($result)) {
-					$cartTotal = $cartTotal + ($row["price"]);	
-					?>
+						<div class="cart_title">Cos</div>
+
+
+
+            <?php 
+            if (empty($_SESSION['cart'])){
+            ?>
+              <div class="order_total">
+							<div class="order_total_content text-center">
+								<div class="order_total_title">Nu există articole în cos</div>
+							</div>
+						</div>
+            <?php }else{ 
+                $query="SELECT * FROM product WHERE id IN($in)";
+                $result = mysqli_query($conn, $query);
+                while ($row = mysqli_fetch_assoc($result)) {
+                $cartTotal = $cartTotal + ($row["price"]);	
+              ?>
 						<div class="cart_items">
 							<ul class="cart_list">
 								<li class="cart_item clearfix">
@@ -147,30 +159,22 @@ $in = implode(',',$_SESSION['cart']);
 								</li>
 							</ul>
 						</div>
-						<?php }
-						session_start();
+						<?php } 
 						$_SESSION['total'] = $cartTotal;
-						if (empty($_SESSION['cart'])){
-						?>
-						<div class="order_total">
-							<div class="order_total_content text-center">
-								<div class="order_total_title">Nu există articole în cart</div>
-							</div>
-						</div>
-						
-						<?php }else{ ?>
-						<div class="order_total">
+            ?>
+
+            <div class="order_total">
 							<div class="order_total_content text-md-right">
 								<div class="order_total_title">Comanda totală:</div>
 								<div class="order_total_amount">€<?php echo $cartTotal; ?></div>
 							</div>
 						</div>
-						
+
 						<div class="cart_buttons">
-							<a href="cart/svuota.php" class="button cart_button_clear">Cart gol</a>
+							<a href="cart/svuota.php" class="button cart_button_clear">Cos gol</a>
 							<a href="checkout.php" class="button cart_button_checkout">Finalizează cumpărăturile</a>
 						</div>
-						<?php } ?>
+            <?php } ?>
 					</div>
 				</div>
 			</div>
