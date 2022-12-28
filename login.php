@@ -1,3 +1,6 @@
+<?php 
+session_start();
+?>
 <!doctype html>
 <html lang="en">
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
@@ -23,6 +26,16 @@
         <div class="card-img-left d-none d-md-flex"> </div>
         <div class="card-body">
           <h5 class="card-title text-center">Conectare</h5>
+          <?php
+		      //info message
+		if(isset($_SESSION['error'])){
+      ?>
+          <div class="alert alert-danger" role="alert">
+            <?php echo $_SESSION['error']; ?>
+          </div>
+          <?php
+			unset($_SESSION['error']);
+		}?>
           <form class="form-signin" action="config/handler.php" method="post">
             <?php if (isset($_GET['error'])) { ?>
             <p class="error"><?php echo $_GET['error']; ?></p>

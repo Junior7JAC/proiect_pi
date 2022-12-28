@@ -112,6 +112,20 @@ unset($_SESSION['qty_array']);
 			<?php
 			unset($_SESSION['message']);
 		}?>
+    <?php
+		//info message
+		if(isset($_SESSION['error'])){
+			?>
+			<div class="row">
+				<div class="col-sm-12 col-sm-offset-6">
+					<div class="alert alert-danger text-center">
+						<?php echo $_SESSION['error']; ?>
+					</div>
+				</div>
+			</div>
+			<?php
+			unset($_SESSION['error']);
+		}?>
   <!-- Banner -->
   
   <div class="banner_2 mb-5">
@@ -232,7 +246,7 @@ unset($_SESSION['qty_array']);
                 <div class="tabs_line"><span></span></div>
               </div>
               
-              <!-- Pannello 1 -->
+              <!-- Panou 1 -->
 				
               <div class="product_panel panel active">
                 <div class="featured_slider slider">
@@ -262,9 +276,9 @@ unset($_SESSION['qty_array']);
                 <div class="featured_slider_dots_cover"></div>
               </div>
               
-              <!-- Pannello 2 -->
+              <!-- Panou 2 -->
               <div class="product_panel panel">
-                <div class="featured_slider slider"> 
+                <div class="featured_slider slider">
                  <?php
 					$query="SELECT * from product WHERE category_name='Componente PC'";
 					$result = mysqli_query($conn, $query);
@@ -294,7 +308,7 @@ unset($_SESSION['qty_array']);
                 <div class="featured_slider_dots_cover"></div>
               </div>
               
-              <!-- Pannello 3 -->
+              <!-- Panou 3 -->
               
               <div class="product_panel panel">
                 <div class="featured_slider slider"> 

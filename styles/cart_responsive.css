@@ -110,10 +110,6 @@
 
 @media only screen and (max-width: 991px)
 {
-	.top_bar
-	{
-		/*display: none;*/
-	}
 	.header_search
 	{
 		height: 50px;
