@@ -53,20 +53,25 @@ if ($_SESSION['user_type'] != 1) {
                   <div class="header_search_form_container">
                     <form action="#" class="header_search_form clearfix">
                       <input type="search" required="required" class="header_search_input" placeholder="Cauta produse...">
-                      <div class="custom_dropdown">
-                        <div class="custom_dropdown_list"> <span class="custom_dropdown_placeholder clc">Toate categoriile</span> <i class="fas fa-chevron-down"></i>
+                      <div class="custom_dropdown d-none">
+                        <div class="custom_dropdown_list">
+                          <span class="custom_dropdown_placeholder clc" id="span_category">Toate</span>
+                          <i class="fas fa-chevron-down"></i>
                           <ul class="custom_list clc">
-                            <li><a class="clc" href="#">Toate categoriile</a></li>
-                            <li><a class="clc" href="#">Componente PC</a></li>
-                            <li><a class="clc" href="#">Laptop</a></li>
-                            <li><a class="clc" href="#">Networking</a></li>
-                            <li><a class="clc" href="#">Accesorii</a></li>
-                            <li><a class="clc" href="#">Smartphone</a></li>
+                            <li><a class="clc active" href="#" data-value="all">Toate</a></li>
+                            <?php
+                            $sql = "SELECT * FROM category";
+                            $result = mysqli_query($conn, $sql);
+                            while ($row = mysqli_fetch_assoc($result)) {
+                            ?>
+                              <li><a class="clc" href="#" data-value="<?php echo $row['name'] ?>"><?php echo $row['name'] ?></a></li>
+                            <?php } ?>
                           </ul>
                         </div>
                       </div>
                       <button type="submit" class="header_search_button trans_300" value="Submit"><img src="images/search.png" alt=""></button>
                     </form>
+                    <div class="search_results"></div>
                   </div>
                 </div>
               </div>
@@ -288,32 +293,6 @@ if ($_SESSION['user_type'] != 1) {
         </div>
       </div>
     </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     <!-- Footer -->
     <footer class="footer">
       <div class="container">
@@ -352,11 +331,12 @@ if ($_SESSION['user_type'] != 1) {
       </div>
     </div>
   </div>
+  
+</body>
   <script src="./js/jquery-3.3.1.min.js"></script>
   <script src="./styles/bootstrap4/popper.js"></script>
   <script src="./styles/bootstrap4/bootstrap.min.js"></script>
   <script src="./js/admin.js"></script>
   <script src="./js/custom.js"></script>
-</body>
-
+  <script src="./js/search.js"></script>
 </html>

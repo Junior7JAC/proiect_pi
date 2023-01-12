@@ -389,15 +389,15 @@ Header Main
 .header_search_input
 {
 	display: block;
-	position: relative;
-	width: calc((100% - 50px) * 0.601);
-	height: 100%;
-	line-height: 50px;
-	border: none !important;
-	outline: none !important;
-	padding-left: 26px;
-	color: #7f7f7f;
-	float: left;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  line-height: 50px;
+  border: none !important;
+  outline: none !important;
+  padding-left: 26px;
+  color: #7f7f7f;
+  float: left;
 }
 .header_search_input::-webkit-input-placeholder
 {

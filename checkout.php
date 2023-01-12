@@ -3,9 +3,6 @@ include 'config/conn.php';
 require "./config//phpmailer//src//PHPMailer.php";
 require "./config//phpmailer//src//SMTP.php";
 require "./config//phpmailer//src//Exception.php";
-
-
-
 session_start();
 $in = implode(',', $_SESSION['cart']);
 ?>
@@ -50,20 +47,25 @@ $in = implode(',', $_SESSION['cart']);
                   <div class="header_search_form_container">
                     <form action="#" class="header_search_form clearfix">
                       <input type="search" required="required" class="header_search_input" placeholder="Cauta produse...">
-                      <div class="custom_dropdown">
-                        <div class="custom_dropdown_list"> <span class="custom_dropdown_placeholder clc">Toate categoriile</span> <i class="fas fa-chevron-down"></i>
+                      <div class="custom_dropdown d-none">
+                        <div class="custom_dropdown_list">
+                          <span class="custom_dropdown_placeholder clc" id="span_category">Toate</span>
+                          <i class="fas fa-chevron-down"></i>
                           <ul class="custom_list clc">
-                            <li><a class="clc" href="#">Toate categoriile</a></li>
-                            <li><a class="clc" href="#">Componente PC</a></li>
-                            <li><a class="clc" href="#">Laptop</a></li>
-                            <li><a class="clc" href="#">Networking</a></li>
-                            <li><a class="clc" href="#">Accesorii</a></li>
-                            <li><a class="clc" href="#">Smartphone</a></li>
+                            <li><a class="clc active" href="#" data-value="all">Toate</a></li>
+                            <?php
+                            $sql = "SELECT * FROM category";
+                            $result = mysqli_query($conn, $sql);
+                            while ($row = mysqli_fetch_assoc($result)) {
+                            ?>
+                              <li><a class="clc" href="#" data-value="<?php echo $row['name'] ?>"><?php echo $row['name'] ?></a></li>
+                            <?php } ?>
                           </ul>
                         </div>
                       </div>
                       <button type="submit" class="header_search_button trans_300" value="Submit"><img src="images/search.png" alt=""></button>
                     </form>
+                    <div class="search_results"></div>
                   </div>
                 </div>
               </div>
@@ -109,9 +111,7 @@ $in = implode(',', $_SESSION['cart']);
               </div>
           </div>
     </header>
-
     <!-- Cart -->
-
     <?php
     if (empty($_SESSION['cart'])) { ?>
       <!-- Show message -->
@@ -154,10 +154,10 @@ $in = implode(',', $_SESSION['cart']);
         $content = "<b>Comanda dvs. care conține $count articole pentru un total de € $_SESSION[total] a fost plasată cu succes! Vă mulțumim că ați ales Vittorio pentru cumpărături!</b>";
         $mail->MsgHTML($content);
         if (!$mail->Send()) {
-          echo "Eroare la trimiterea email-ului:";
+          echo "Error while sending Email.";
           var_dump($mail);
         } else {
-          echo "Email-ul a fost trimis cu succes.";
+          echo "Email sent successfully";
         }
         ?>
       <?php
@@ -171,18 +171,6 @@ $in = implode(',', $_SESSION['cart']);
     <?php   }
     }
     ?>
-
-
-
-
-
-
-
-
-
-
-
-
     <!-- Footer -->
     <footer class="footer">
       <div class="container">
@@ -221,7 +209,8 @@ $in = implode(',', $_SESSION['cart']);
       </div>
     </div>
   </div>
-  <script src="js/jquery-3.3.1.min.js"></script>
+</body>
+<script src="js/jquery-3.3.1.min.js"></script>
   <script src="styles/bootstrap4/popper.js"></script>
   <script src="styles/bootstrap4/bootstrap.min.js"></script>
   <script src="plugins/greensock/TweenMax.min.js"></script>
@@ -232,6 +221,5 @@ $in = implode(',', $_SESSION['cart']);
   <script src="plugins/slick-1.8.0/slick.js"></script>
   <script src="plugins/easing/easing.js"></script>
   <script src="js/custom.js"></script>
-</body>
-
+  <script src="js/search.js"></script>
 </html>

@@ -1,5 +1,23 @@
 <?php
 include "conn.php";
+if(isset($_POST['search'])) {
+  $search = $_POST['search'];
+  $sql = "SELECT * FROM product WHERE name LIKE '%$search%'";
+  //return data as JSON
+  $result = mysqli_query($conn, $sql);
+  $data = array();
+
+  if(mysqli_num_rows($result) > 0) {
+    while($row = mysqli_fetch_assoc($result)) {
+      $data[] = $row;
+    }
+    echo json_encode($data);
+    exit();
+  } else {
+    echo json_encode($data);
+    exit();
+  }
+}
 if(isset($_POST['delete_produs'])){
   if(isset($_POST['delete_id'])){
     $id = $_POST['delete_id'];
