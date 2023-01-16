@@ -7,7 +7,8 @@ const searchInput = document.querySelector('.header_search_input');
  if(searchValue.trim() === ''){
   const resultsDiv = document.querySelector('.search_results');
   resultsDiv.innerHTML = '';
-  return;
+  
+  
  }else{
   
   const xhr = new XMLHttpRequest();

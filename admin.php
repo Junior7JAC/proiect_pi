@@ -88,7 +88,14 @@ if ($_SESSION['user_type'] != 1) {
                           <center>
                             Bine ai venit, <?php echo ($_SESSION['username']) ?>!
                           </center>
-                        </span><br>
+                        </span>
+                        <?php 
+                        if ($_SESSION['user_type'] = 1) {
+                          ?>
+                          <a style="margin-top: 10px;" class="dropdown-item" href="admin.php">Admin</a>
+                          <?php
+                        }
+                        ?>
                         <a class="dropdown-item" href="profile.php">Profil</a><a class="dropdown-item" href="orders.php">Comenzi</a><a class="dropdown-item" href="logout.php">Deconectare</a>
                       </div>
                     </div>
@@ -248,7 +255,7 @@ if ($_SESSION['user_type'] != 1) {
               </div>
               <div class="form-group">
                 <label for="edit_price">Pret</label>
-                <input type="number" class="form-control" id="edit_price" name="edit_price" placeholder="Pret" required>
+                <input type="number" class="form-control" id="edit_price" name="edit_price" placeholder="Pret" step=".01" required>
               </div>
               <div class="form-group">
                 <label for="edit_description">Descriere</label>

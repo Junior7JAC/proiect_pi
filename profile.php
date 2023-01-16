@@ -1,10 +1,7 @@
 <?php
 include 'config/conn.php';
-require "./config//phpmailer//src//PHPMailer.php";
-require "./config//phpmailer//src//SMTP.php";
-require "./config//phpmailer//src//Exception.php";
 session_start();
-$in = implode(',', $_SESSION['cart']);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -132,72 +129,83 @@ $in = implode(',', $_SESSION['cart']);
           </div>
     </header>
     <!-- Cart -->
-    <?php
-    if (empty($_SESSION['cart'])) { ?>
-      <!-- Show message -->
-      <div class="order_total">
-        <div class="order_total_content text-center">
-          <div class="order_total_title">Nu există produse în coșul dvs.!</div>
+    <!-- Display username, name, surname, email from database with php -->
+    <div class="container mt-5">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-header">
+              <h3>Profilul meu</h3>
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-9">
+                  <table class="table table-hover">
+                    <?php 
+                    $sql = "SELECT * FROM users WHERE username = '" . $_SESSION['username'] . "'";
+                    $result = mysqli_query($conn, $sql);
+                    $row = mysqli_fetch_assoc($result);
+                    ?>
+
+                    <tr>
+                      <td>Nume de utilizator</td>
+                      <td><?php echo $row['username'] ?></td>
+                    </tr>
+                    <tr>
+                      <td>Nume</td>
+                      <td><?php echo $row['name'] ?></td>
+                    </tr>
+                    <tr>
+                      <td>Prenume</td>
+                      <td><?php echo $row['surname'] ?></td>
+                    </tr>
+                    <tr>
+                      <td>Email</td>
+                      <td><?php echo $row['email'] ?></td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-
-
-    <?php } else {
-      if (isset($_SESSION["username"])) {
-        $query = "SELECT * from product WHERE id IN($in)";
-        $result = mysqli_query($conn, $query);
-        $count = mysqli_num_rows($result);
-        ?>
-
-        <div class="order_total">
-          <div class="order_total_content text-center">
-            <div class="order_total_title">Comanda dvs. care conține <?php echo $count ?> articole pentru un total de €
-              <?php echo $_SESSION['total'] ?>
-              a fost plasată cu succes!
-              Vă mulțumim că ați ales Vittorio pentru cumpărături! </div>
-          </div>
+      <!-- Modify Password if old password is correct -->
+        <div class="row mt-5">
+            <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                <h3>Modifica parola</h3>
+                </div>
+                <div class="card-body">
+                <div class="row">
+                    <div class="col-md-9">
+                    <form action="config/handler.php" method="POST">
+                        <input type="hidden" name="username" value="<?php echo $_SESSION['username'] ?>">
+                        <div class="form-group">
+                        <label for="old_password">Parola veche</label>
+                        <input type="password" class="form-control" name="old_password" id="old_password" required>
+                        </div>
+                        <div class="form-group mt-3">
+                        <label for="new_password">Parola noua</label>
+                        <input type="password" class="form-control" name="new_password" id="new_password" required>
+                        </div>
+                        <div class="form-group mt-3">
+                        <label for="confirm_password">Confirma parola noua</label>
+                        <input type="password" class="form-control" name="confirm_password" id="confirm_password" required>
+                        </div>
+                        <button type="submit" name="changepass" class="btn btn-primary mt-3">Modifica parola</button>
+                    </form>
+                    </div>
+                </div>
+                </div>
+            </div>
+            </div>
         </div>
-        <?php
-        $mail = new PHPMailer\PHPMailer\PHPMailer;
-        $mail->IsSMTP();
-        $mail->Mailer = "smtp";
-        $mail->SMTPAuth = TRUE;
-        $mail->SMTPSecure = "tls";
-        $mail->Port = 587;
-        $mail->Host = "smtp.gmail.com";
-        $mail->Username = "noreply.vittorio@gmail.com";
-        $mail->Password = "pkokiimvixzjbcmm";
-        $mail->IsHTML(true);
-        $mail->AddAddress($_SESSION['email'], $_SESSION['username']);
-        $mail->SetFrom($mail->Username, "Vittorio");
-        $mail->Subject = "Comanda dvs. a fost plasata cu succes!";
-        $content = "<b>Comanda dvs. care conține $count articole pentru un total de € $_SESSION[total] a fost plasată cu succes! Vă mulțumim că ați ales Vittorio pentru cumpărături!</b>";
-        $mail->MsgHTML($content);
-        if (!$mail->Send()) {
-          echo "Error while sending Email.";
-          var_dump($mail);
-        } else {
-          $total = $_SESSION['total'];
-          $user_id = $_SESSION['id'];
+    </div>
+    
 
-          //insert into database the order
-          $query = "INSERT INTO orders (status,total, user_id) VALUES ('Finalizata', '$total', '$user_id')";
-          $result = mysqli_query($conn, $query);
-          $order_id = mysqli_insert_id($conn);
-          echo "Email sent successfully";
-        }
-        ?>
-        <?php
-        $_SESSION['cart'] = array();
-      } else { ?>
-        <div class="order_total">
-          <div class="order_total_content text-center">
-            <div class="order_total_title"> Va rugam sa va logati pentru a finaliza comanda! </div>
-          </div>
-        </div>
-      <?php }
-    }
-    ?>
+    
     <!-- Footer -->
     <footer class="footer">
       <div class="container">

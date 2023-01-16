@@ -37,6 +37,24 @@ INSERT INTO `category` (`id`, `name`, `image`) VALUES
 	(5, 'Console', '5.png'),
 	(6, 'Laptop', '6.png');
 
+-- Dumping structure for table vstack.orders
+CREATE TABLE IF NOT EXISTS `orders` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `status` varchar(50) COLLATE utf8mb4_bin NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `total` decimal(10,2) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK_orders_users` (`user_id`),
+  CONSTRAINT `FK_orders_users` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+
+-- Dumping data for table vstack.orders: ~2 rows (approximately)
+INSERT INTO `orders` (`id`, `status`, `created_at`, `total`, `user_id`) VALUES
+	(2, 'Finalizata', '2023-01-13 08:40:40', 399.99, 10),
+	(3, 'Finalizata', '2023-01-13 08:41:06', 2050.00, 10),
+	(4, 'Finalizata', '2023-01-13 08:50:05', 399.99, 10);
+
 -- Dumping structure for table vstack.product
 CREATE TABLE IF NOT EXISTS `product` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -115,13 +133,13 @@ CREATE TABLE IF NOT EXISTS `users` (
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4;
 
--- Dumping data for table vstack.users: ~7 rows (approximately)
+-- Dumping data for table vstack.users: ~6 rows (approximately)
 INSERT INTO `users` (`id`, `name`, `surname`, `username`, `email`, `password`, `created`, `user_type`) VALUES
 	(1, 'Peppino', 'Peppo', 'Peppe', 'peppe@gmail.com', '202cb962ac59075b964b07152d234b70', '2022-12-06 11:19:15', 0),
 	(7, 'giuliano', 'zera', 'giuliano', 'gg@gmail.com', '202cb962ac59075b964b07152d234b70', '2021-05-04 07:11:59', 0),
 	(8, 'alessandro', 'volta', 'avolta', 'a@gmail.com', '202cb962ac59075b964b07152d234b70', '2021-05-04 07:22:41', 0),
-	(9, 'asd', 'dasd', 'd', 'ssaass@asdx.com', '7815696ecbf1c96e6894b779456d330e', '2022-12-04 20:51:50', 0),
-	(10, 'asd', 'asd', 'asd', 'junioranghel7@gmail.com', '7815696ecbf1c96e6894b779456d330e', '2022-12-28 20:39:24', 1),
+	(9, 'asd', 'dasd', 'd', 'ssaass@asdx.com', '7815696ecbf1c96e6894b779456d330e', '2023-01-13 08:28:09', 0),
+	(10, 'asd', 'asd', 'asd', 'junioranghel7@gmail.com', 'a8f5f167f44f4964e6c998dee827110c', '2023-01-13 08:28:36', 1),
 	(13, 'costel', 'Anghel', 'juni', 'junioranghel7@gmail.com', 'd8578edf8458ce06fbc5bb76a58c5ca4', '2022-12-28 20:39:26', 0);
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
