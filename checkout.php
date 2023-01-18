@@ -166,7 +166,7 @@ $in = implode(',', $_SESSION['cart']);
         $mail->Port = 587;
         $mail->Host = "smtp.gmail.com";
         $mail->Username = "noreply.vittorio@gmail.com";
-        $mail->Password = "pkokiimvixzjbcmm";
+        $mail->Password = "crjxizenqxwmeklu";
         $mail->IsHTML(true);
         $mail->AddAddress($_SESSION['email'], $_SESSION['username']);
         $mail->SetFrom($mail->Username, "Vittorio");
